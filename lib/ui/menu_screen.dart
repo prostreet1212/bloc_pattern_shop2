@@ -12,8 +12,8 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MenuBloc? menuBloc = BlocProvider1.of(context);
-    BadgeBloc? badgeBloc = BlocProvider1.of(context);
+    MenuBloc? menuBloc = BlocProvider.of(context);
+    BadgeBloc? badgeBloc = BlocProvider.of(context);
 
     return Scaffold(
       appBar: AppBar(

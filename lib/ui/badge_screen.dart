@@ -11,8 +11,8 @@ class BadgeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BadgeBloc? badgeBloc = BlocProvider1.of(context);
-    MenuBloc? menuBloc = BlocProvider1.of(context);
+    BadgeBloc? badgeBloc = BlocProvider.of(context);
+    MenuBloc? menuBloc = BlocProvider.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Корзина'),
@@ -25,7 +25,7 @@ class BadgeScreen extends StatelessWidget {
           : Column(
               children: [
                 Expanded(
-                    flex: 12,
+                    flex: 9,
                     child: ListView.builder(
                         itemCount: badgeBloc.badgeList.length,
                         itemBuilder: (context, index) {
@@ -69,23 +69,26 @@ class BadgeScreen extends StatelessWidget {
                         })),
                 Expanded(
                   flex: 1,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.black),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.black),
+                        ),
+                        child: const Text(
+                          'Оформить заказ',
+                          style: TextStyle(fontSize: 18, color: Colors.white),
+                        ),
+                        onPressed: () {
+                          badgeBloc.action.add(ClearBadgeAction());
+                          menuBloc!.action.add(ChangeBuyStatus());
+                          Navigator.pop(context);
+                          showToast('Заказ успешно выполнен');
+                        },
                       ),
-                      child: const Text(
-                        'Оформить заказ',
-                        style: TextStyle(fontSize: 18, color: Colors.white),
-                      ),
-                      onPressed: () {
-                        badgeBloc.action.add(ClearBadgeAction());
-                        menuBloc!.action.add(ChangeBuyStatus());
-                        Navigator.pop(context);
-                        showToast('Заказ успешно выполнен');
-                      },
                     ),
                   ),
                 )

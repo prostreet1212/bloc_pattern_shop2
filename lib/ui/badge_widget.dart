@@ -13,8 +13,7 @@ class BadgeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     BadgeBloc? badgeBloc = BlocProvider1.of(context);
-    print('build badge widget');
+     BadgeBloc? badgeBloc = BlocProvider.of(context);
     return StreamBuilder<List<CoffeeMenu>>(
         initialData: badgeBloc!.badgeList,
         stream: badgeBloc.state,
